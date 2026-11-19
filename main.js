@@ -209,6 +209,8 @@ ipcMain.handle('file:folder', async () => { const r = await dialog.showOpenDialo
 
 app.whenReady().then(() => {
   registerMediaProtocol();
+  // Hard network kill-switch: this app never talks to the internet.
+  session.defaultSession.webRequest.onBeforeRequest({ urls: ['http://*/*', 'https://*/*', 'ws://*/*', 'wss://*/*', 'ftp://*/*'] }, (_d, cb) => cb({ cancel: true }));
   session.defaultSession.setPermissionRequestHandler((_wc, perm, cb) => cb(false));
   createWindow();
 });
