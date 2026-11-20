@@ -33,8 +33,8 @@ toolbar.append(btn('Open file', openFile, 'primary'), h('span', { class: 'sep' }
 const IMG_EXT = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'tif', 'tiff'];
 const kindOf = (n) => { const e = (String(n).split('.').pop() || '').toLowerCase(); return IMG_EXT.includes(e) ? 'image' : e === 'pdf' ? 'pdf' : 'media'; };
 const FILTERS = [['Damaged files', [...IMG_EXT, 'pdf', 'mp4', 'mkv', 'mov', 'avi', 'webm', 'wmv', 'flv', 'm4v', 'mpg', 'mpeg', 'ts', '3gp', 'mp3', 'wav', 'flac', 'aac', 'm4a', 'ogg', 'opus', 'wma']], ['Media files', ['mp4', 'mkv', 'mov', 'avi', 'webm', 'wmv', 'flv', 'm4v', 'mpg', 'mpeg', 'ts', '3gp', 'mp3', 'wav', 'flac', 'aac', 'm4a', 'ogg', 'opus', 'wma']], ['All files', ['*']]];
-async function openFile() {
-  const f = (await window.host.openFiles({ read: false, filters: FILTERS }))[0]; if (!f) return;
+async function openFile(dropped) {
+  const f = ((Array.isArray(dropped) && dropped) || await window.host.openFiles({ read: false, filters: FILTERS }))[0]; if (!f) return;
   file = { fid: f.id, name: f.name, size: f.size, probe: null, kind: kindOf(f.name) }; report = null; lastFix = null;
   render(); await runCheck();
 }
@@ -273,4 +273,5 @@ function renderRight() {
 }
 function renderStatus() { status.textContent = ''; status.append(h('span', { text: file ? file.name : 'No file' }), h('span', { class: 'grow' }), h('span', { text: busy ? 'Working...' : 'Ready' })); }
 document.addEventListener('keydown', (e) => { if (e.ctrlKey && e.key.toLowerCase() === 'o') { e.preventDefault(); if (!busy) openFile(); } });
+window.host.onDrop((items) => { if (!busy && items.length) openFile(items); });
 render();
