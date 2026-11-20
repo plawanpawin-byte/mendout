@@ -1,12 +1,12 @@
 <p align="center"><img src="screenshots/banner.png" alt="Mendout" width="100%"></p>
 
-<p align="center"><b>Repair damaged media</b><br>Version 1.0.2 for Windows · Free · Offline · No account</p>
+<p align="center"><b>Repair damaged media</b><br>Version 1.0.3 for Windows · Free · Offline · No account</p>
 
 <p align="center"><a href="https://github.com/plawanpawin-byte/mendout/releases/latest"><b>Download Mendout</b></a> · <a href="https://github.com/plawanpawin-byte/Lookout">All Lookout apps</a></p>
 
 ---
 
-Mendout checks a video or audio file for problems and repairs it into a new file. It explains what it found in plain language and offers fixes that match the damage. Your original file is never touched.
+Mendout checks a video, audio file, picture or PDF for problems and repairs it into a new file. It explains what it found in plain language and offers fixes that match the damage. Your original file is never touched.
 
 **Made for:** A recording that stopped early, a file that will not seek or play, or audio that drifts away from the picture.
 
@@ -14,7 +14,7 @@ Mendout checks a video or audio file for problems and repairs it into a new file
 
 **On this page:** [Screenshots](#see-it-in-action) · [Interface](#the-interface) · [Features](#everything-it-can-do) · [How to use it](#how-to-use-it) · [Formats](#files-and-formats) · [Privacy](#private-by-design) · [Install](#install) · [Questions](#questions)
 
-## What is new in 1.0.2
+## What is new in 1.0.3
 
 A refreshed interface: every toolbar button now has a clear line icon, the app's mark sits at the top left, controls share one height and spacing, panels line up in tidy grids, and the toolbar keeps every button reachable on smaller windows by switching less important buttons to icons.
 
@@ -78,6 +78,16 @@ A frame from the repaired video.
 - Save the audio only
 - Recover the video picture only
 
+### Pictures and PDF
+
+- Repair PNG checksums, junk and cut-off ends, and JPEG end markers
+- Re-encode a damaged picture as PNG or JPEG
+- Rebuild the index of a cut-off PDF so it opens again
+
+### Audio
+
+- Save damaged WAV, FLAC or MP3 as a clean WAV or FLAC
+
 ### Safe
 
 - Always writes a new file
@@ -92,7 +102,7 @@ A frame from the repaired video.
 
 ## Files and formats
 
-Common video and audio files such as MP4, MOV, MKV, AVI, WebM, MP3 and WAV.
+Video and audio such as MP4, MOV, MKV, AVI, WebM, MP3, WAV and FLAC, pictures (PNG, JPEG) and PDF.
 
 ## Private by design
 
@@ -113,7 +123,7 @@ Common video and audio files such as MP4, MOV, MKV, AVI, WebM, MP3 and WAV.
 ## Questions
 
 **Can everything be fixed?**  
-No. If the beginning of a file is destroyed there may be nothing to rebuild. Mendout tells you instead of pretending.
+No. If the beginning of a file is destroyed there may be nothing to rebuild. PDFs that hide their catalog in compressed streams cannot be rebuilt offline. Mendout tells you instead of pretending.
 
 ## About Lookout
 
