@@ -87,9 +87,11 @@ const rfind = (u8, pat) => { outer: for (let i = u8.length - pat.length; i >= 0;
 const PNG_SIG = [137, 80, 78, 71, 13, 10, 26, 10];
 const asciiBytes = (s) => Array.from(s).map((c) => c.charCodeAt(0));
 const u32 = (u8, o) => ((u8[o] << 24) | (u8[o + 1] << 16) | (u8[o + 2] << 8) | u8[o + 3]) >>> 0;
-const imgType = (u8) => { const at = (sig) => find(u8, sig, 0); if (at(PNG_SIG) >= 0 && at(PNG_SIG) < 64) return 'png'; const j = find(u8, [0xff, 0xd8, 0xff]); if (j >= 0 && j < 64) return 'jpg'; if (u8[0] === 0x47 && u8[1] === 0x49 && u8[2] === 0x46) return 'gif'; if (u8[0] === 0x42 && u8[1] === 0x4d) return 'bmp'; if (u8[0] === 0x52 && u8[1] === 0x49 && u8[8] === 0x57) return 'webp'; return null; };
+const imgType = (u8) => { const at = (sig) => find(u8, sig, 0); if (at(PNG_SIG) >= 0 && at(PNG_SIG) < 64) return 'png'; { const ih = find(u8, asciiBytes('IHDR'), 0); if (ih >= 12 && ih < 80 && u32(u8, ih - 4) === 13) return 'png'; } const j = find(u8, [0xff, 0xd8, 0xff]); if (j >= 0 && j < 64) return 'jpg'; if (u8[0] === 0x47 && u8[1] === 0x49 && u8[2] === 0x46) return 'gif'; if (u8[0] === 0x42 && u8[1] === 0x4d) return 'bmp'; if (u8[0] === 0x52 && u8[1] === 0x49 && u8[8] === 0x57) return 'webp'; return null; };
 function pngScan(u8) {
-  const st = find(u8, PNG_SIG); const probs = []; if (st < 0) return { probs: ['The PNG signature is missing'], chunks: [], start: -1 };
+  let st = find(u8, PNG_SIG); const probs = [];
+  if (st < 0) { const ih = find(u8, asciiBytes('IHDR'), 0); if (ih >= 12 && ih < 80) { st = ih - 12; probs.push('The PNG signature at the start is damaged'); } }
+  if (st < 0) return { probs: ['The PNG signature is missing'], chunks: [], start: -1 };
   if (st > 0) probs.push(st + ' bytes of junk before the image start');
   let o = st + 8; const chunks = []; let end = false;
   while (o + 12 <= u8.length) {
