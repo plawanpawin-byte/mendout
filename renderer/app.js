@@ -275,3 +275,5 @@ function renderStatus() { status.textContent = ''; status.append(h('span', { tex
 document.addEventListener('keydown', (e) => { if (e.ctrlKey && e.key.toLowerCase() === 'o') { e.preventDefault(); if (!busy) openFile(); } });
 window.host.onDrop((items) => { if (!busy && items.length) openFile(items); });
 render();
+
+window.addEventListener('beforeunload', (e) => { if (busy) { e.preventDefault(); e.returnValue = ''; } });
