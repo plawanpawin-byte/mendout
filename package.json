@@ -1,7 +1,7 @@
 {
   "name": "mendout",
   "productName": "Mendout",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Repair damaged video and audio files and check them for problems.",
   "main": "main.js",
   "author": "Lookout",
