@@ -272,4 +272,5 @@ function renderRight() {
   if (!report.header && !file.kind.match(/image|pdf/) || (!report.header && file.kind === 'pdf')) right.append(h('div', { class: 'muted', style: 'font-size:12px', text: 'The header is unreadable, so the repair methods are unavailable. Files from a recording that was interrupted often need a similar, healthy file from the same device to recover; Mendout cannot do that yet.' }));
 }
 function renderStatus() { status.textContent = ''; status.append(h('span', { text: file ? file.name : 'No file' }), h('span', { class: 'grow' }), h('span', { text: busy ? 'Working...' : 'Ready' })); }
+document.addEventListener('keydown', (e) => { if (e.ctrlKey && e.key.toLowerCase() === 'o') { e.preventDefault(); if (!busy) openFile(); } });
 render();
