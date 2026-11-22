@@ -1,7 +1,7 @@
 {
   "name": "mendout",
   "productName": "Mendout",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Repair damaged video and audio files and check them for problems.",
   "main": "main.js",
   "author": "Lookout",
@@ -53,7 +53,8 @@
       "allowToChangeInstallationDirectory": true,
       "perMachine": false,
       "deleteAppDataOnUninstall": false
-    }
+    },
+    "afterPack": "afterPack.js"
   },
   "devDependencies": {
     "electron": "^45.4.1",
